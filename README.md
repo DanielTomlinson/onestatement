@@ -48,3 +48,35 @@ Note that the security information is institution-specific - you'll need to chec
 
 You then simply need to run `./onestatement.py`, and view the index.html file it generates (in the same directory).
 
+## API Usage
+
+It's possible to use the API provided by finance_api.py directly. At some point in time it'll be packaged nicely so it can be installed using pip.
+
+### getBalance
+
+Example: `getBalance(provider, security_info, account_number)`
+
+`security_info` is a dictionary of security credentials (see the example config file above).
+
+Returns the balance as a float (i.e. without a £ sign).
+
+### getTransactions
+
+**Doesn't yet exist**, but the syntax will be:
+
+Example: `getTransactions(provider, security_info, account_number, start_date[, end_date])`
+
+The start date should be earlier than the end date (which is optional, and defaults to today). Dates should be formatted in [ISO 8601 format](https://en.wikipedia.org/wiki/ISO_8601).
+
+Returns JSON of the transactions containing the following:
+
+Account ID - the ID of the acount where the transaction took place.  
+Date - the date of the transaction.  
+Type - a three character code corresponding to the transaction type (for example, cash widthdrawal, faster payment, or bank giro credit).  
+Description - the description of the transaction (from the institution).   
+Amount - the amount of the transaction.  
+Merchant - the merchant in the transaction, if the data is available / extractable from the description.  
+Location - the location of the merchant in the transaction, if available.  
+Tags - tags to assist in money management, for example 'food' or 'discretionary spending'.  
+URL - the URL relating to a transaction, for example, an Amazon order URL.  
+Other - a field for future use.
